@@ -1,21 +1,28 @@
-function Pet(name, image) {
-  this.name = name;
-  this.image =  image;
-}
+function foo(condition) {
+  let bar;
 
-var Image;
-var catImage;
-var pudding;
+  console.log(bar);
 
-Image = class {
-  constructor(file) {
-    this.file = file;
+  let qux = 0.5772;
+
+  if (condition) {
+    qux = 3.1415;
+    console.log(qux);
+  } else {
+    bar = 24;
+
+    let xyzzy = function() {
+      qux = 2.7183;
+      console.log(qux);
+    };
+
+    console.log(qux);
+    console.log(xyzzy());
   }
+
+  qux = 42;
+  console.log(qux);
 }
 
-Pet.prototype.walk = function() {
-  console.log(`${this.name} is walking.`);
-};
-
-catImage = new Image("cat.png");
-pudding = new Pet("Pudding", catImage);
+foo(true);
+foo(false);
