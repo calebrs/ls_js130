@@ -1,11 +1,12 @@
-let password = (function() {
-  const chars = 'abcdefghijklmnopqrstuvwxyz1234567890' //36
-  let result = '';
-  for (let char = 0; char < 16; char += 1) {
-    let randomIndx = Math.floor(Math.random() * 36);
-    result += chars[randomIndx];
-  }
-  return result;
-})();
+let obj = {
+  prop1: 5,
+  prop2: 6,
+}
 
-console.log(password);
+let obj2 = {
+  prop1: 3,
+  prop2: 1,
+}
+
+Object.assign(obj, obj2);
+console.log(obj);
