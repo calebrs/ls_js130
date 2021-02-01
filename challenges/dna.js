@@ -41,8 +41,10 @@ class DNA {
         for (let indx = 0; indx < this.strand.length; indx += 1) {
             let currentStrand = this.strand[indx];
             let currentDistance = distance[indx];
-            
-            if (currentDistance !== currentStrand) {
+
+            if (!currentDistance) {
+                continue;
+            } else if (currentDistance !== currentStrand) {
                 total += 1;
             }
         }
