@@ -40,7 +40,7 @@ Algorithm:
 class RomanNumeral {
   static ONES = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
   static TENS = ['X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC'];
-  static HUNDREDS = ['C', 'CC', 'CCC', 'CD', 'D', 'DC', 'DCC', 'DCCC', 'DM'];
+  static HUNDREDS = ['C', 'CC', 'CCC', 'CD', 'D', 'DC', 'DCC', 'DCCC', 'CM'];
   static THOUSANDS = ['M', 'MM', 'MMM'];
 
   constructor(number) {
@@ -48,18 +48,31 @@ class RomanNumeral {
   }
 
   toRoman() {
-    let num = this.number;
-    let thousands = Math.floor(num / 1000);
-    let hundreds = Math.floor((num % 1000) / 100);
-    let tens = Math.floor((num % (100 * hundreds)) / 10);
-    let ones = Math.floor(num % (10 * tens));
-    
-    let romanThousand = THOUSANDS[thousands - 1];
-    let romanHundred = HUNDREDS[hundreds - 1];
-    let romanTens = TENS[tens - 1];
-    let romanOnes = ONES[ones - 1];
+    let numAsString = String(this.number);
+    let result = '';
+    let iteration = 1
 
-    return romanThousand + romanHundred + romanTens + romanOnes;
+    for (let indx = numAsString.length - 1; indx >= 0; indx -= 1) {
+      let currentNum = Number(numAsString[indx]);
+      if (currentNum === 0) {
+        iteration += 1;
+        continue;
+      } 
+
+      if (iteration === 1) {
+        result = RomanNumeral.ONES[currentNum - 1] + result;
+      } else if (iteration === 2) {
+        result = RomanNumeral.TENS[currentNum - 1] + result;
+      } else if (iteration === 3) {
+        result = RomanNumeral.HUNDREDS[currentNum - 1] + result;
+      } else {
+        result = RomanNumeral.THOUSANDS[currentNum - 1] + result;
+      }
+
+      iteration += 1;
+    }
+
+    return result;
   }
 }
 
