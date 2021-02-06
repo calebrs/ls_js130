@@ -44,7 +44,7 @@ class Series {
     let result = [];
     let splitDigits = this.digits.split('').map(digit => Number(digit));
 
-    splitDigits.forEach((digit, indx) => {
+    splitDigits.forEach((_, indx) => {
       let endIndx = num + indx;
       if (endIndx <= this.digits.length) {
         let slice = splitDigits.slice(indx, endIndx);
@@ -55,8 +55,5 @@ class Series {
     return result;
   }
 }
-let test = new Series('01234');
-console.log(test.slices(2));
-
 
 module.exports = Series;
