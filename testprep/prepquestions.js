@@ -7,7 +7,7 @@ function foo() {
     let a = 1;
   }
 
-  console.log(a);
+  console.log(a); //throws error, a is not defined
 }
 
 foo();
@@ -17,12 +17,17 @@ function foo() {
     var a = 1;
   }
 
-  console.log(a);
+  console.log(a); // logs undefined to the console
 }
 
 foo();
 
-Answer:
+Answer: the first block throws an error on line 10 while the second block prints
+1 to the console. This demonstrates how variables declared with let or var differ
+in how they are hoisted. In the first block, a has block scope. So when the code
+reaches line 13, a is out of scope. One the other hand, when the variable is 
+declared with var. it si hoisted within the function block. Meaning that var gets rearranged at the top 
+of the funtion then is reassigned to the value of 1 when the if block executes.
 
 2. What errors do the two final lines of this code output?
 
@@ -35,10 +40,11 @@ function foo2() {
   let bar = new Bar();
 }
 
-foo1();
+foo1(); // cannot access bar before initialization
 foo2(); 
 
-Answer:
+Answer: An error is thrown on line 2 becuase Bars definition has not been initialized yet.
+likewise, bar is out of scope of foo2(), so that code would not execute either.
 
 3. What does the following code output and why?
 
@@ -51,7 +57,8 @@ function foo() {
 foo();
 console.log(bar);
 
-Answer:
+Answer: An error is through when bar is assigned a number of line 54. This is becuase in strict mode, you cannot assign variables to the global object
+using this syntax. 
 
 4. Describe what the following code outputs and why.
 
@@ -68,6 +75,9 @@ let doIt = obj.go;
 doIt();
 console.log(obj.a);
 
+Answer: While strict mode is enabled, the implicit execution context is set to undefined. When the doIt varibl is assigned to the method definition
+obj.go, the implicit execution context becomes undefined. So when the doIt() method is called an error is thrown.
+
 5. Describe what this code does and how it realtes to closure:
 
 let counter = 0;
@@ -80,7 +90,9 @@ incrementCounter();
 incrementCounter();
 console.log(counter); // 2
 
-Answer:
+Answer: on the first line a new variable is declared and set to 0. lines 85 - 87 define a function. When the function is called on line 89, the code on line
+86 runs, adding 1 to counter.  counter now equals 1. after running again counter equals 2. This works, becuase when the function incrementCounter is defined, a closure is created
+that contains a reference to counter. So, when the function is called, it can access the counter variable.
 
 6. Write your own example of partial funtion application:
 
