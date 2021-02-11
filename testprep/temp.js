@@ -1,6 +1,7 @@
-function product() {
-  let numbers = Array.from(arguments);
-  return numbers.reduce((total, number) => total * number);
-}
+let count = 5;
 
-let result = product(2, 3, 4, 5);
+{
+  let count = 7;
+
+  console.log(count);
+}

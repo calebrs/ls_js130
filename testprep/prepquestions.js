@@ -96,11 +96,36 @@ that contains a reference to counter. So, when the function is called, it can ac
 
 6. Write your own example of partial funtion application:
 
-Answer:
+Answer: 
+function multiply(num1, num2) {
+  return num1 * num2;
+}
+
+function makeMultiplier(num1) {
+  return function(num2) {
+    return multiply(num1, num2)
+  }
+}
+
+This code demonstrates partial function application in how the makemultiplier function applies the arguments to the function that it returns. 
+makeMultiplier applies the first argumetn num1. while it's returned function applies the rest of the arguments when it is called.
 
 7. Write your own example of creating private data using closure. Describe how the data is private
 
 Answer:
+
+let displayAccountNum = (function() {
+  let accountNum = 12345;
+  return function() {
+    console.log(accountNum);
+  }
+})();
+
+displayAccountNum();
+
+this examples creates private data using a closure and an IIFE. The IIFE that starts on the first line returns a function
+whos closure contains a reference to the accountNum variable. So, when displayAccountNum is called it can log the account number 
+to the console. The user does not have direct access to edit the accountNum variable.
 
 8. Describe what the following code does. Why would a developer want to do this?
 // thousands of lines of messy JavaScript code!
@@ -117,6 +142,9 @@ console.log((function(array) {
 })([5, 10, 12, 7, 9, 6, 24, -10, -200, 37])); // 24
 
 // more messy JavaScript code
+
+Answer: the first line of this code will log the reuturn value of the IIFE on lines 133 - 139, the largest value in an input array.  The reason 
+a developer might want to do this, is so that they can avoid any variable naming conficts with the code above and below the code block.
 
 9. Describe how object destructuring works using the following code:
 let { foo, bar, qux } = obj;
@@ -165,7 +193,12 @@ function divideOneBy(divisor) {
 divideOneBy(1);
 divideOneBy(0);
 
-Answer:
+Answer: If an erroneaous input is entered into the called function, like on the last line, the if block on line two will be called.
+The if block creates a new error whos type is DivideByZeroError with an error message of "divide by zero!". When the div function is called on line 182
+this error is returned and begins checking if it exists inside of a try block. Beucase it does, the code with the catch block will then be executed. The code checks 
+what kind of error it is. If it's a divide by 0 error, the code will simply log the error to the console and continue executing. If the error is not a divide by zero error, then
+it will re-throw the error. This is useful because a dividebyzero error isn't the only kind of error that this might encounter. Differentiating between different kinds of errors
+allows the user to handle the errors appropriatly.
 
 13. What is the side effect of this code?
 
@@ -177,7 +210,8 @@ function divideBy(numerator, denominator) {
   return numerator / denominator;
 }
 
-Answer:
+Answer: The side effect in this code is that it thorws an error under a certain condition. This is a side effect because it uses the Error constructor to create and record a message
+into a new error object. Error throwing in this case is a seperate behavior of this function that isn't directly related to the return value.
 
 ??MORE??
 */
