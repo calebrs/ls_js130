@@ -96,7 +96,17 @@ that contains a reference to counter. So, when the function is called, it can ac
 
 6. Write your own example of partial funtion application:
 
-Answer:
+Answer: 
+function makeAdder(adder) {
+  return function(num) {
+    return num + adder;
+  }
+}
+
+This is partial function application in that the main function `makeAdder` applies it
+s argumenti into the function that it returns. Whenever the returned function is called
+`add` references the parameter in makeAdder becuase of closure, and always will be 
+what was originally fed into the first function.
 
 7. Write your own example of creating private data using closure. Describe how the data is private
 
@@ -117,6 +127,8 @@ console.log((function(array) {
 })([5, 10, 12, 7, 9, 6, 24, -10, -200, 37])); // 24
 
 // more messy JavaScript code
+
+Answer: 
 
 9. Describe how object destructuring works using the following code:
 let { foo, bar, qux } = obj;

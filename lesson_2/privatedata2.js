@@ -1,53 +1,37 @@
-"use strict";
-
-// function makeList() {
-//   let items = [];
-
-//   return function(item) {
-
-//     if (!item) {
-//       if (items.length === 0) {
-//         console.log('The list is empty.');
-//       } else {
-//         console.log(items.join(', '));
-//       }
-//     } else if (items.includes(item)) {
-//       items.splice(items.indexOf(item), 1);
-//       console.log(`${item} removed!`)
-//     } else if (!items.includes(item)) {
-//       items.push(item);
-//       console.log(`${item} added!`);
-//     }
-//   }
-// }
-
 function makeList() {
   let items = [];
-  
+
   return {
+    // items: [], -- this line removed
 
     add: function(item) {
-      items.push(item);
-      console.log(item + ' added!');
+      let index = items.indexOf(item);
+      if (index === -1) {
+        items.push(item);
+        console.log(item + " added!");
+      }
     },
 
-    remove(item) {
-      items.splice(items.indexOf(item), 1);
-      console.log(item + ' removed!');
+    list: function() {
+      if (items.length === 0) {
+        console.log("The list is empty.");
+      } else {
+        items.forEach(function(item) {
+          console.log(item);
+        });
+      }
     },
 
-    list() {
-      items.forEach(item => console.log(item));
-    }
-  }
+    remove: function(item) {
+      let index = items.indexOf(item);
+      if (index !== -1) {
+        items.splice(index, 1);
+        console.log(item + " removed!");
+      }
+    },
+  };
 }
 
-let newList = makeList();
-newList.add('make food');
-newList.list();
-newList.remove('make food');
-
-// newList('make breakfast');
-// newList('make bed');
-// newList();
-// newList('make breakfast');
+let newItem = makeList();
+newItem.add('Eat food');
+console.log(makeList.items); // you cannot acess variables inside the closure!
